@@ -1,0 +1,50 @@
+/* Main container styling */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Progress labels */
+.progress-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #3498db;
+}
+
+/* Form labels */
+.form-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+/* Form fields */
+.form-field {
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-background-color: #ecf0f1;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+/* Submit button */
+.submit-button {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.submit-button:hover {
+    -fx-background-color: #2ecc71;
+}
+
+/* Error styling (optional) */
+.error-label {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12px;
+}

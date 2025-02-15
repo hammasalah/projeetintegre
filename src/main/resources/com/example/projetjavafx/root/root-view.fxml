@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.RootController">
+   <children>
+      <ScrollPane>
+         <content>
+            <AnchorPane prefHeight="741.0" prefWidth="927.0" stylesheets="@css/root.css">
+            
+                <ButtonBar prefHeight="49.0" prefWidth="924.0">
+                    <buttons>
+                        <Button fx:id="organizerButton" mnemonicParsing="false" onAction="#onOrganizerButtonClick" text="Organizer" />
+                        <Button fx:id="eventsButton" mnemonicParsing="false" onAction="#onEventsClick" text="Events" />
+                        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#onProfileClick" text="Profile" />
+                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginClick" text="Login" />
+                        <Button fx:id="groupButton" mnemonicParsing="false" onAction="#onGroupButtonClick" text="Group" />
+                        <Label fx:id="welcomeText" minWidth="22.0" prefHeight="17.0" prefWidth="223.0" text="Welcome!" />
+                    </buttons>
+                </ButtonBar>
+
+                <Button fx:id="createJobButton" layoutX="423.0" layoutY="216.0" mnemonicParsing="false" onAction="#onCreateJobClick" text="Create Job" />
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
