@@ -12,6 +12,7 @@ module com.example.projetjavafx {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires mysql.connector.j;
+    requires java.desktop;
 
     // Root package
     exports com.example.projetjavafx.root;
@@ -41,4 +42,6 @@ module com.example.projetjavafx {
     exports com.example.projetjavafx.root.organizer;
     exports com.example.projetjavafx.root.group;
     exports com.example.projetjavafx.root.profile;
+
+
 }

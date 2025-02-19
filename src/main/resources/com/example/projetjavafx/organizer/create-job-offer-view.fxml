@@ -1,91 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" stylesheets="@css/create-job.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.organizer.CreateJobOfferController">
+<BorderPane stylesheets="@css/create-job.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.projetjavafx.root.organizer.CreateJobOfferController">
 
-    <VBox alignment="TOP_CENTER" prefHeight="700" prefWidth="800" spacing="10" style="-fx-background-color: #f5f5f5; -fx-padding: 20;" stylesheets="@css/create-job.css">
+    <!-- Left Sidebar (Original Style) -->
+    <left>
+        <VBox alignment="TOP_LEFT" prefWidth="250" spacing="15" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+            <!-- Application Title -->
+            <Label text="Event Manager Pro" style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;" />
 
-        <!-- Title Section -->
-        <Label styleClass="title-label" text="Create Job Offer" />
+            <!-- Navigation Buttons -->
+            <VBox spacing="10">
+                <Button text="Home" onAction="#handleHomeButton" style="-fx-text-fill: white; -fx-background-color: #048c7f;" />
+                <Button text="Analytics" onAction="#handleAnalyticsButton" style="-fx-text-fill: white; -fx-background-color: #048c7f;" />
+                <Button text="Create Event" style="-fx-text-fill: white; -fx-background-color: #048c7f;" />
+                <Button text="Create Job Post" style="-fx-text-fill: white; -fx-background-color: #4a148c;" />
+            </VBox>
 
-        <!-- Progress Indicators -->
-        <HBox alignment="CENTER" spacing="20">
-            <Label styleClass="progress-label" text="✔ Select Type" />
-            <Label styleClass="progress-label" text="⚫ Job Details" />
-        </HBox>
+            <!-- User Profile Section -->
+            <VBox spacing="5" style="-fx-padding: 15; -fx-background-color: #34495e;">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <ImageView fitHeight="40" fitWidth="40" style="-fx-background-radius: 20;" />
+                    <VBox>
+                        <Label text="Admin Name" style="-fx-text-fill: white; -fx-font-weight: bold;" />
+                        <Label text="Organizer" style="-fx-text-fill: #bdc3c7;" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+    </left>
 
-        <!-- Main Form -->
-        <GridPane hgap="20" prefWidth="700" vgap="15">
-            <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" prefWidth="120" />
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="200" />
-                <ColumnConstraints hgrow="NEVER" prefWidth="120" />
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="200" />
-            </columnConstraints>
+    <!-- Center Content (Modernized Layout) -->
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="700" prefWidth="800" spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+            <!-- Header -->
+            <Label text="Create New Job Offer" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
 
-            <!-- Row 0: Job Title -->
-            <Label styleClass="form-label" text="Job Title *" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="jobTitleField" styleClass="form-field" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+            <!-- Form Fields -->
+            <GridPane fx:id="formGridPane" hgap="20" vgap="15">
+                <Label text="Job Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="jobTitleField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-            <!-- Row 1: Event Title -->
-            <Label styleClass="form-label" text="Event Title *" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="eventTitleField" styleClass="form-field" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                <Label text="Event Title:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="eventTitleField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-            <!-- Row 2: Location & Employment Type -->
-            <Label styleClass="form-label" text="Job Location" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="jobLocationField" styleClass="form-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Job Location:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="jobLocationField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-            <Label styleClass="form-label" text="Employment Type" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <ComboBox fx:id="employmentTypeComboBox" prefWidth="150" styleClass="form-field" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <Label text="Employment Type:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <ComboBox fx:id="employmentTypeComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-            <!-- Row 3: Application Deadline -->
-            <Label styleClass="form-label" text="Application Deadline" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <DatePicker fx:id="applicationDeadlinePicker" styleClass="form-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Application Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <DatePicker fx:id="applicationDeadlinePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-            <!-- Row 4: Salary Range -->
-            <Label styleClass="form-label" text="Salary Range" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                <TextField fx:id="minSalaryField" prefWidth="100" promptText="Min" styleClass="form-field" />
-                <Label styleClass="form-label" text="to" />
-                <TextField fx:id="maxSalaryField" prefWidth="100" promptText="Max" styleClass="form-field" />
-                <ComboBox fx:id="currencyComboBox" prefWidth="80" styleClass="form-field" />
-            </HBox>
+                <Label text="Min Salary:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="minSalaryField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-            <!-- Row 5: Job Description -->
-            <Label styleClass="form-label" text="Job Description" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <TextArea fx:id="jobDescriptionArea" prefHeight="100" styleClass="form-field" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <Label text="Max Salary:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <TextField fx:id="maxSalaryField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-            <!-- Row 6: Recruiter Info -->
-            <Label styleClass="form-label" text="Recruiter Name *" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-            <TextField fx:id="recruiterNameField" styleClass="form-field" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label text="Currency:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <ComboBox fx:id="currencyComboBox" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-            <Label styleClass="form-label" text="Recruiter Email *" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <TextField fx:id="recruiterEmailField" styleClass="form-field" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                <Label text="Job Description:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <TextArea fx:id="jobDescriptionArea" GridPane.columnIndex="1" GridPane.rowIndex="8" prefRowCount="4" />
 
-            <!-- Row 7: Submit Button -->
-            <Button fx:id="postJobButton" prefWidth="200" styleClass="submit-button" text="Post Job" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="7" />
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-        </GridPane>
-    </VBox>
-</AnchorPane>
+                <Label text="Recruiter Name:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                <TextField fx:id="recruiterNameField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+
+                <Label text="Recruiter Email:" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                <TextField fx:id="recruiterEmailField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            </GridPane>
+
+            <!-- Submit Button -->
+            <Button fx:id="postJobButton" text="Post Job" onAction="#handlePostJob" />
+        </VBox>
+    </center>
+</BorderPane>

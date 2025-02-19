@@ -21,35 +21,27 @@ public class RootController {
     public Button groupButton;
     public Label welcomeText;
     public Button createJobButton;
-    // ... [keep your existing button declarations]
 
     public void initialize() throws SQLException {
     }
 
     private void loadView(String fxmlPath, ActionEvent event) {
         try {
-            // 1. Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-
-            // 2. Get the current stage
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-
-            // 3. Set the new scene
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
             welcomeText.setText("Error loading view: " + e.getMessage());
         }
     }
 
-    // Modified button handlers
     @FXML
     protected void onOrganizerButtonClick(ActionEvent event) {
-        loadView("/com/example/projetJavaFX/organizer/organizer-view.fxml", event);
+        loadView("/com/example/projetjavafx/organizer/organizer-view.fxml", event);
     }
 
     @FXML
@@ -76,8 +68,18 @@ public class RootController {
     protected void onRegisterClick(ActionEvent event) {
         loadView("/com/example/projetjavafx/auth/register-view.fxml", event);
     }
+
     @FXML
     protected void onCreateJobClick(ActionEvent event) {
         loadView("/com/example/projetjavafx/organizer/create-job-offer-view.fxml", event);
+    }
+
+    public void onDachClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/organizer/organizer-view.fxml", event);
+    }
+
+    @FXML
+    protected void onAnalyticsClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/organizer/analytics-view.fxml", event);
     }
 }

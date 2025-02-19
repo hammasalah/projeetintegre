@@ -1,13 +1,14 @@
 package com.example.projetjavafx.root.organizer;
 
-import com.example.projetjavafx.root.DbConnection.AivenMySQLManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class CreateJobOfferController {
@@ -52,9 +53,6 @@ public class CreateJobOfferController {
     private GridPane formGridPane;
 
     @FXML
-    private VBox mainVBox;
-
-    @FXML
     public void initialize() {
         // Initialize ComboBoxes
         employmentTypeComboBox.getItems().addAll("Full-Time", "Part-Time", "Contract", "Internship");
@@ -68,42 +66,35 @@ public class CreateJobOfferController {
         postJobButton.setOnAction(event -> handlePostJob());
     }
 
+    @FXML
     private void handlePostJob() {
-        // Validate form data
         if (!validateForm()) {
             showAlert("Error", "Please fill all required fields.");
             return;
         }
 
         // Insert job offer into the database
-        try (Connection conn = AivenMySQLManager.getConnection()) {
-            String sql = "INSERT INTO jobs (job_title, event_title, job_location, employment_type, application_deadline, min_salary, max_salary, currency, job_description, recruiter_name, recruiter_email, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+        try {
+            String jobTitle = jobTitleField.getText();
+            String eventTitle = eventTitleField.getText();
+            String jobLocation = jobLocationField.getText();
+            String employmentType = employmentTypeComboBox.getValue();
+            String applicationDeadline = applicationDeadlinePicker.getValue().toString();
+            String minSalary = String.valueOf(Double.parseDouble(minSalaryField.getText()));
+            String maxSalary = String.valueOf(Double.parseDouble(maxSalaryField.getText()));
+            String currency = currencyComboBox.getValue();
+            String jobDescription = jobDescriptionArea.getText();
+            String recruiterName = recruiterNameField.getText();
+            String recruiterEmail = recruiterEmailField.getText();
 
-            // Set parameters
-            pstmt.setString(1, jobTitleField.getText());
-            pstmt.setString(2, eventTitleField.getText());
-            pstmt.setString(3, jobLocationField.getText());
-            pstmt.setString(4, employmentTypeComboBox.getValue());
-            pstmt.setString(5, applicationDeadlinePicker.getValue().toString());
-            pstmt.setDouble(6, Double.parseDouble(minSalaryField.getText()));
-            pstmt.setDouble(7, Double.parseDouble(maxSalaryField.getText()));
-            pstmt.setString(8, currencyComboBox.getValue());
-            pstmt.setString(9, jobDescriptionArea.getText());
-            pstmt.setString(10, recruiterNameField.getText());
-            pstmt.setString(11, recruiterEmailField.getText());
-            pstmt.setInt(12, 1); // Replace with the logged-in user's ID (e.g., from session)
+            JobRepository.createJob(jobTitle, eventTitle, jobLocation, employmentType, applicationDeadline, minSalary, maxSalary, currency, jobDescription, recruiterName, recruiterEmail);
 
-            // Execute the query
-            pstmt.executeUpdate();
             showAlert("Success", "Job offer posted successfully!");
 
         } catch (SQLException e) {
-            e.printStackTrace();
             showAlert("Error", "Failed to post job offer: " + e.getMessage());
         }
     }
-
     private boolean validateForm() {
         // Check if all required fields are filled
         return !jobTitleField.getText().isEmpty() &&
@@ -123,5 +114,31 @@ public class CreateJobOfferController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void handleHomeButton(javafx.event.ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/root/root-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleAnalyticsButton(javafx.event.ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/organizer/analytics-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

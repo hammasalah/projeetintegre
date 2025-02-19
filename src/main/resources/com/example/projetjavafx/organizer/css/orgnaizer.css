@@ -1,0 +1,107 @@
+/* Main container styling */
+#sidebar {
+    -fx-background-color: #2c3e50; /* Replaced --biscay with a dark blue color */
+    -fx-padding: 20;
+}
+
+#appTitle {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white; /* Added text color */
+}
+
+#navLinks Button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+#navLinks Button:hover {
+    -fx-background-color: #ffaad4; /* Replaced --jacksons-purple with a pink color */
+    -fx-text-fill: white;
+}
+
+#userSection {
+    -fx-padding: 15;
+    -fx-background-color: #f8d7e4; /* Replaced --bali-hai with a light pink color */
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+#userName {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e; /* Replaced --steel-gray with a dark gray color */
+}
+
+#userRole {
+    -fx-font-size: 12px;
+    -fx-text-fill: gray; /* Replaced --dorado with gray */
+}
+
+#content {
+    -fx-background-color: white;
+}
+
+#tabBar Label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 15;
+}
+
+#tabEventManagement {
+    -fx-border-color: black;
+    -fx-border-width: 0 0 2 0;
+}
+
+#tableEvents, #tableJobs {
+    -fx-background-color: white;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+}
+
+#quickActions VBox {
+    -fx-background-color: #fde8f1; /* Replaced --silver-rust with a light pink color */
+    -fx-padding: 15;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+#quickActions Button {
+    -fx-background-color: #ff70a6; /* Replaced --cabaret with a pink color */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8 15;
+    -fx-border-radius: 5;
+}
+
+#quickActions Button:hover {
+    -fx-background-color: #ff4d94; /* Darker shade of pink */
+}
+
+/* Additional styles for buttons and labels */
+.btnDashboard {
+    -fx-background-color: #4a148c; /* Replaced --jacksons-purple with a purple color */
+    -fx-text-fill: white;
+}
+
+.btnCreateEvent {
+    -fx-background-color: #d81b60; /* Replaced --cabaret with a pink color */
+    -fx-text-fill: white;
+}
+
+.btnManageJobs {
+    -fx-background-color: #3949ab; /* Replaced --east-bay with a blue color */
+    -fx-text-fill: white;
+}
+
+.stats-label {
+    -fx-font-size: 24px;
+    -fx-text-fill: #2c3e50; /* Replaced --biscay with a dark blue color */
+}
+
+.stats-label-alt {
+    -fx-font-size: 24px;
+    -fx-text-fill: #d81b60; /* Replaced --cabaret with a pink color */
+}

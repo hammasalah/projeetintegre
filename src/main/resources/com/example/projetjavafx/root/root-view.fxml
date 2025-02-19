@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.RootController">
-   <children>
-      <ScrollPane>
-         <content>
-            <AnchorPane prefHeight="741.0" prefWidth="927.0" stylesheets="@css/root.css">
-            
-                <ButtonBar prefHeight="49.0" prefWidth="924.0">
-                    <buttons>
-                        <Button fx:id="organizerButton" mnemonicParsing="false" onAction="#onOrganizerButtonClick" text="Organizer" />
-                        <Button fx:id="eventsButton" mnemonicParsing="false" onAction="#onEventsClick" text="Events" />
-                        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#onProfileClick" text="Profile" />
-                        <Button fx:id="registerButton" mnemonicParsing="false" onAction="#onRegisterClick" text="Register" />
-                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLoginClick" text="Login" />
-                        <Button fx:id="groupButton" mnemonicParsing="false" onAction="#onGroupButtonClick" text="Group" />
-                        <Label fx:id="welcomeText" minWidth="22.0" prefHeight="17.0" prefWidth="223.0" text="Welcome!" />
-                    </buttons>
-                </ButtonBar>
+<?import javafx.scene.layout.Pane?>
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.RootController">
+    <!-- Top Bar with Title and Login/Register -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: #2c3e50; -fx-padding: 10; -fx-pref-width: 100%;">
+            <Label text="Connect Sphere" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #008080;" />
+            <Pane HBox.hgrow="ALWAYS" /> <!-- Pushes the next HBox to the right -->
+            <HBox alignment="TOP_RIGHT" spacing="15">
+                <Label fx:id="welcomeText" text="Welcome!" style="-fx-font-size: 16px; -fx-text-fill: #333;" />
+                <Button fx:id="loginButton" text="Login" onAction="#onLoginClick" style="-fx-background-color: #008080; -fx-text-fill: white;" />
+                <Button fx:id="registerButton" text="Register" onAction="#onRegisterClick" style="-fx-background-color: #008080; -fx-text-fill: white;" />
+            </HBox>
+        </HBox>
+    </top>
 
-                <Button fx:id="createJobButton" layoutX="423.0" layoutY="216.0" mnemonicParsing="false" onAction="#onCreateJobClick" text="Create Job" />
-            </AnchorPane>
-         </content>
-      </ScrollPane>
-   </children>
-</AnchorPane>
+    <!-- Left Sidebar -->
+    <left>
+        <VBox alignment="TOP_LEFT" prefWidth="250" spacing="15" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;" text="Navigation" />
+            <VBox spacing="10">
+                <Button style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Analytics" onAction="#onAnalyticsClick" />
+                <Button style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Organizer" onAction="#onOrganizerButtonClick" />
+                <Button style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Events" onAction="#onEventsClick" />
+                <Button style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Profile" onAction="#onProfileClick" />
+                <Button style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Group" onAction="#onGroupButtonClick" />
+                <Button style="-fx-text-fill: white; -fx-background-color: #4a148c;" text="Create Job" onAction="#onCreateJobClick" />
+                <Button style="-fx-text-fill: white; -fx-background-color: #4a148c;" text="Dashboard" onAction="#onDachClick" />
+                <Button style="-fx-text-fill: white; -fx-background-color: #048c7f;"
+                        text="Analytics"
+                        onAction="#onAnalyticsClick"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Center Content with Background Image -->
+    <center>
+        <AnchorPane>
+            <ImageView fx:id="backgroundImageView" fitHeight="800" fitWidth="1200" preserveRatio="true" style="-fx-opacity: 0.4;" />
+        </AnchorPane>
+    </center>
+</BorderPane>
