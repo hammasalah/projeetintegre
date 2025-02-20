@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,14 +20,18 @@ public class RootController {
     public Button registerButton;
     public Button loginButton;
     public Button groupButton;
-    public Label welcomeText;
     public Button createJobButton;
+    public Button jobButton;
+    @FXML
+    private ImageView imageView;
 
     public void initialize() throws SQLException {
     }
 
     private void loadView(String fxmlPath, ActionEvent event) {
         try {
+
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -35,7 +40,7 @@ public class RootController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            welcomeText.setText("Error loading view: " + e.getMessage());
+
         }
     }
 
@@ -81,5 +86,10 @@ public class RootController {
     @FXML
     protected void onAnalyticsClick(ActionEvent event) {
         loadView("/com/example/projetjavafx/organizer/analytics-view.fxml", event);
+    }
+
+    @FXML
+    protected void onJobFeedClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/jobfeed/job-feed-view.fxml", event);
     }
 }

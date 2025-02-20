@@ -140,6 +140,17 @@ public class OrganizerController {
 
 
 
-    public void onAnalyticsClick(ActionEvent actionEvent) {
+    public void onAnalyticsClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/organizer/analytics-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
 }

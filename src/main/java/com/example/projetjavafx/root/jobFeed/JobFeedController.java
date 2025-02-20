@@ -1,4 +1,160 @@
 package com.example.projetjavafx.root.jobFeed;
 
+import com.example.projetjavafx.root.organizer.Job;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
 public class JobFeedController {
+    @FXML private FlowPane jobsContainer;
+    @FXML private Button homeButton, profileButton, logoutButton, dashboardButton, eventsButton, jobFeedButton, groupsButton, settingsButton;
+
+    private int currentUserId = 1; // Replace with the actual logged-in user's ID
+
+    @FXML
+    public void initialize() {
+        try {
+            loadJobs();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Button actions
+        homeButton.setOnAction(this::onHomeClick);
+        profileButton.setOnAction(this::onProfileClick);
+        logoutButton.setOnAction(this::onLogoutClick);
+        dashboardButton.setOnAction(this::onDashboardClick);
+        eventsButton.setOnAction(this::onEventsClick);
+        groupsButton.setOnAction(this::onGroupsClick);
+        settingsButton.setOnAction(this::onSettingsClick);
+    }
+
+    private void loadJobs() throws SQLException {
+        List<Job> jobs = JobFeedRepository.getAllJobs();
+        jobsContainer.getChildren().clear();
+
+        for (Job job : jobs) {
+            VBox card = createJobCard(job);
+            jobsContainer.getChildren().add(card);
+        }
+
+        jobsContainer.setPrefWrapLength(4 * 320); // Ensures 4 cards per row
+    }
+
+    private VBox createJobCard(Job job) {
+        VBox card = new VBox();
+        card.getStyleClass().add("job-card");
+        card.setPrefWidth(300);
+        card.setSpacing(10);
+
+        Label title = new Label(job.getJobTitle());
+        title.getStyleClass().add("job-title");
+
+        Label event = new Label("Event: " + job.getEventTitle());
+        Label location = new Label("📍 " + job.getJobLocation());
+        Label type = new Label("⚡ " + job.getEmploymentType());
+        Label salary = new Label(String.format("💰 %s - %s %s", job.getMinSalary(), job.getMaxSalary(), job.getCurrency()));
+        Label deadline = new Label("⏰ Apply by: " + job.getApplicationDeadline());
+
+        Label recruiter = new Label("👤 " + job.getRecruiterName());
+        Label email = new Label("📧 " + job.getRecruiterEmail());
+
+        Button applyButton = new Button("Apply Now");
+        applyButton.getStyleClass().add("apply-button");
+
+        // Set action for the Apply button
+        applyButton.setOnAction(e -> handleApplyButton(job.getJobId()));
+
+        card.getChildren().addAll(title, event, location, type, salary, deadline, recruiter, email, applyButton);
+        return card;
+    }
+
+    // Handle Apply Button Click
+    private void handleApplyButton(int jobId) {
+        try {
+            JobFeedRepository.applyForJob(currentUserId, jobId);
+
+            // Show success alert
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Application Submitted");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Application submitted successfully!");
+            successAlert.showAndWait(); // Show the alert and wait for user to close it
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            // Show error alert
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("Failed to submit application");
+            errorAlert.setContentText("An error occurred: " + e.getMessage());
+            errorAlert.showAndWait(); // Show the alert and wait for user to close it
+        }
+    }
+
+    // Navigation Methods
+    @FXML
+    private void onHomeClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/root/root-view.fxml", event);
+    }
+
+    @FXML
+    private void onProfileClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/profile/profile-view.fxml", event);
+    }
+
+    @FXML
+    private void onLogoutClick(ActionEvent event) {
+        System.out.println("Logging out...");
+        navigateTo("/com/example/projetjavafx/auth/login-view.fxml", event);
+    }
+
+    @FXML
+    private void onDashboardClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/organizer/organizer-view.fxml", event);
+    }
+
+    @FXML
+    private void onEventsClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/events/events-view.fxml", event);
+    }
+
+    @FXML
+    private void onGroupsClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/group/group-profile-view.fxml", event);
+    }
+
+    @FXML
+    private void onSettingsClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/settings/settings-view.fxml", event);
+    }
+
+    @FXML
+    private void onAnalyticsClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/organizer/analytics-view.fxml", event);
+    }
+
+    // Helper method for navigation
+    private void navigateTo(String fxmlPath, ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

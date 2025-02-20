@@ -1,6 +1,9 @@
 package com.example.projetjavafx.root.organizer;
 
+
+
 public class Job {
+    private int jobId; // Add this field
     private String jobTitle;
     private String eventTitle;
     private String jobLocation;
@@ -15,9 +18,10 @@ public class Job {
     private String createdAt;
 
     // Constructor
-    public Job(String jobTitle, String eventTitle, String jobLocation, String employmentType,
+    public Job(int jobId, String jobTitle, String eventTitle, String jobLocation, String employmentType,
                String applicationDeadline, double minSalary, double maxSalary, String currency,
                String jobDescription, String recruiterName, String recruiterEmail, String createdAt) {
+        this.jobId = jobId;
         this.jobTitle = jobTitle;
         this.eventTitle = eventTitle;
         this.jobLocation = jobLocation;
@@ -30,6 +34,11 @@ public class Job {
         this.recruiterName = recruiterName;
         this.recruiterEmail = recruiterEmail;
         this.createdAt = createdAt;
+    }
+
+    // Add getter for jobId
+    public int getJobId() {
+        return jobId;
     }
 
     // Getters and Setters

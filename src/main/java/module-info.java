@@ -17,6 +17,9 @@ module com.example.projetjavafx {
     // Root package
     exports com.example.projetjavafx.root;
     opens com.example.projetjavafx.root to javafx.fxml;
+    opens com.example.projetjavafx.root.jobFeed to javafx.fxml;
+
+
 
     // Controller package accesses
     opens com.example.projetjavafx.root.auth to javafx.fxml;
@@ -42,6 +45,8 @@ module com.example.projetjavafx {
     exports com.example.projetjavafx.root.organizer;
     exports com.example.projetjavafx.root.group;
     exports com.example.projetjavafx.root.profile;
+    // Add to exports section
+    exports com.example.projetjavafx.root.jobFeed;
 
 
 }

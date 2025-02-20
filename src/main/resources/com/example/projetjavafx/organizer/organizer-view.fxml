@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@css/orgnaizer.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.organizer.OrganizerController">
+<BorderPane stylesheets="@css/orgnaizer.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.organizer.OrganizerController" prefHeight="1050" prefWidth="1920">
 
     <!-- Left Sidebar -->
     <left>

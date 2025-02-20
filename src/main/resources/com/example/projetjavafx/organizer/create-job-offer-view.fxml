@@ -7,7 +7,7 @@
 <BorderPane stylesheets="@css/create-job.css"
             xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.projetjavafx.root.organizer.CreateJobOfferController">
+            fx:controller="com.example.projetjavafx.root.organizer.CreateJobOfferController" prefHeight="1050" prefWidth="1920">
 
     <!-- Left Sidebar (Original Style) -->
     <left>
