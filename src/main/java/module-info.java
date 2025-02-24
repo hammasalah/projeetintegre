@@ -47,6 +47,8 @@ module com.example.projetjavafx {
     exports com.example.projetjavafx.root.profile;
     // Add to exports section
     exports com.example.projetjavafx.root.jobFeed;
+    exports com.example.projetjavafx.root.jobApplications;
+    opens com.example.projetjavafx.root.jobApplications to javafx.fxml;
 
 
 }

@@ -17,8 +17,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class JobFeedController {
+    public Button createJobButton;
     @FXML private FlowPane jobsContainer;
-    @FXML private Button homeButton, profileButton, logoutButton, dashboardButton, eventsButton, jobFeedButton, groupsButton, settingsButton;
+    @FXML private Button homeButton, profileButton, logoutButton, dashboardButton, eventsButton, jobFeedButton, groupsButton;
 
     private int currentUserId = 1; // Replace with the actual logged-in user's ID
 
@@ -37,7 +38,7 @@ public class JobFeedController {
         dashboardButton.setOnAction(this::onDashboardClick);
         eventsButton.setOnAction(this::onEventsClick);
         groupsButton.setOnAction(this::onGroupsClick);
-        settingsButton.setOnAction(this::onSettingsClick);
+        createJobButton.setOnAction(this::onCreateJobButtonClick);
     }
 
     private void loadJobs() throws SQLException {
@@ -49,13 +50,13 @@ public class JobFeedController {
             jobsContainer.getChildren().add(card);
         }
 
-        jobsContainer.setPrefWrapLength(4 * 320); // Ensures 4 cards per row
+        jobsContainer.setPrefWrapLength(5 * 270); // Ensures 5 cards per row
     }
 
     private VBox createJobCard(Job job) {
         VBox card = new VBox();
         card.getStyleClass().add("job-card");
-        card.setPrefWidth(300);
+        card.setPrefWidth(270);
         card.setSpacing(10);
 
         Label title = new Label(job.getJobTitle());
@@ -83,26 +84,27 @@ public class JobFeedController {
     // Handle Apply Button Click
     private void handleApplyButton(int jobId) {
         try {
-            JobFeedRepository.applyForJob(currentUserId, jobId);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/jobfeed/application-form.fxml"));
+            Parent root = loader.load();
 
-            // Show success alert
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Application Submitted");
-            successAlert.setHeaderText(null);
-            successAlert.setContentText("Application submitted successfully!");
-            successAlert.showAndWait(); // Show the alert and wait for user to close it
+            ApplicationFormController controller = loader.getController();
+            controller.setJobId(jobId);
+            controller.setUserId(currentUserId);
 
-        } catch (SQLException e) {
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Application Form");
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
-
-            // Show error alert
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("Failed to submit application");
-            errorAlert.setContentText("An error occurred: " + e.getMessage());
-            errorAlert.showAndWait(); // Show the alert and wait for user to close it
+            errorAlert.setHeaderText("Cannot open form");
+            errorAlert.setContentText("Failed to load application form.");
+            errorAlert.showAndWait();
         }
     }
+
 
     // Navigation Methods
     @FXML
@@ -157,4 +159,11 @@ public class JobFeedController {
             e.printStackTrace();
         }
     }
+
+    public void onCreateJobButtonClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/organizer/create-job-offer-view.fxml", event);
+
+    }
+
+
 }

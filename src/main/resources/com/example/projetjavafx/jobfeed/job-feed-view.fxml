@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.projetjavafx.root.jobFeed.JobFeedController"
-             stylesheets="@css/job-feed.css">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="1050" prefWidth="1920" stylesheets="@css/job-feed.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.jobFeed.JobFeedController">
+
     <!-- TOP BAR -->
     <top>
-        <HBox spacing="10" style="-fx-background-color: #34495e; -fx-padding: 10;">
-            <Label text="Job Feed" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Home" fx:id="homeButton" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-            <Button text="Profile" fx:id="profileButton" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-            <Button text="Logout" fx:id="logoutButton" style="-fx-background-color: red; -fx-text-fill: white;"/>
+        <HBox id="topBar" spacing="10">
+            <Label id="appTitle" text="Job Feed" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="profileButton" styleClass="nav-button" text="Profile" />
+            <Button id="logoutButton" fx:id="logoutButton" text="Logout" />
         </HBox>
     </top>
 
     <!-- SIDE BAR -->
     <left>
-        <VBox spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
-            <Button text="Dashboard" fx:id="dashboardButton" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-            <Button text="Events" fx:id="eventsButton" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-            <Button text="Job Feed" fx:id="jobFeedButton" style="-fx-background-color: #1abc9c; -fx-text-fill: white;"/>
-            <Button text="Groups" fx:id="groupsButton" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-            <Button text="Settings" fx:id="settingsButton" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
+        <VBox id="sidebar" prefHeight="979.0" prefWidth="250.0" spacing="10">
+            <Button fx:id="dashboardButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Dashboard" textAlignment="CENTER" />
+            <Button fx:id="eventsButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Events" textAlignment="CENTER" />
+            <Button fx:id="jobFeedButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Job Feed" />
+            <Button fx:id="groupsButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Groups" />
+            <Button fx:id="createJobButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Create Job" />
+            <Button fx:id="homeButton" prefHeight="40.0" prefWidth="231.0" styleClass="nav-button" text="Home" />
         </VBox>
     </left>
 
@@ -34,12 +38,10 @@
     <center>
         <ScrollPane fx:id="scrollPane">
             <content>
-                <FlowPane fx:id="jobsContainer"
-                          style="-fx-background-color: #f5f5f5;"
-                          hgap="20" vgap="20"
-                          alignment="CENTER">
+                <FlowPane fx:id="jobsContainer" alignment="CENTER"
+                          hgap="20" vgap="20" prefWrapLength="1793">
                     <padding>
-                        <Insets top="20" right="20" bottom="20" left="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20"/>
                     </padding>
                 </FlowPane>
             </content>

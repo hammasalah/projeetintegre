@@ -8,61 +8,59 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="1050" prefWidth="1920" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.RootController">
+<BorderPane prefHeight="1050" prefWidth="1920" stylesheets="@css/root.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjavafx.root.RootController">
+
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: #2c3e50; -fx-padding: 10; -fx-pref-width: 100%;">
-            <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #008080;" text="Connect Sphere" />
+        <HBox id="topBar" alignment="CENTER_LEFT" spacing="15">
+            <Label id="appTitle" text="Connect Sphere" />
             <Pane HBox.hgrow="ALWAYS" />
-            <HBox alignment="TOP_RIGHT" spacing="15">
-                <Button fx:id="loginButton" onAction="#onLoginClick" style="-fx-background-color: #008080; -fx-text-fill: white;" text="Login" />
-                <Button fx:id="registerButton" onAction="#onRegisterClick" style="-fx-background-color: #008080; -fx-text-fill: white;" text="Register" />
+            <HBox id="authButtons" alignment="TOP_RIGHT" spacing="15">
+                <Button fx:id="loginButton" prefHeight="34.0" prefWidth="141.0" styleClass="auth-button" text="Login" />
+                <Button fx:id="registerButton" prefHeight="34.0" prefWidth="140.0" styleClass="auth-button" text="Register" />
             </HBox>
         </HBox>
     </top>
 
-    <left>
-        <VBox alignment="TOP_LEFT" prefWidth="250" spacing="15" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
-            <Button fx:id="eventsButton" onAction="#onEventsClick" style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Events" />
-            <Button fx:id="organizerButton" onAction="#onOrganizerButtonClick" style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Organizer" />
-            <Button fx:id="profileButton" onAction="#onProfileClick" style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Profile" />
-            <Button fx:id="groupButton" onAction="#onGroupButtonClick" style="-fx-text-fill: white; -fx-background-color: #048c7f;" text="Group" />
-            <Button fx:id="createJobButton" onAction="#onCreateJobClick" style="-fx-text-fill: white; -fx-background-color: #4a148c;" text="Create Job" />
-         <Button fx:id="jobButton" mnemonicParsing="false" onAction="#onJobFeedClick" text="jobs" />
 
+    <left>
+        <VBox id="sidebar" alignment="TOP_LEFT" spacing="15">
+            <Button fx:id="eventsButton" onAction="#onEventsClick" styleClass="nav-button" text="Events" />
+            <Button fx:id="organizerButton" onAction="#onOrganizerButtonClick" styleClass="nav-button" text="Organizer" />
+            <Button fx:id="profileButton" onAction="#onProfileClick" styleClass="nav-button" text="Profile" />
+            <Button fx:id="groupButton" onAction="#onGroupButtonClick"  styleClass="nav-button" text="Group" />
+            <Button fx:id="createJobButton" onAction="#onCreateJobClick" styleClass="nav-button" text="Create Job" />
+            <Button fx:id="jobButton" onAction="#onJobFeedClick" styleClass="nav-button" text="Jobs" />
         </VBox>
     </left>
 
-
     <center>
-        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
-            <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Connect Sphere: Your Gateway to Unforgettable Events">
-            </Label>
+        <VBox id="mainContent" alignment="CENTER" spacing="20">
+            <Label id="heroTitle" text="Connect Sphere: Your Gateway to Unforgettable Events" />
+            <Label id="heroSubtitle" text="Create, participate, and even work at the events that inspire you." />
 
-            <Label style="-fx-font-size: 18px; -fx-text-fill: #34495e;" text="Create, participate, and even work at the events that inspire you." />
-
-            <HBox alignment="CENTER" spacing="20">
-                <VBox alignment="CENTER" spacing="10">
-                    <ImageView fitHeight="100" fitWidth="100" preserveRatio="true" />
-                    <Label style="-fx-font-weight: bold;" text="Create Events" />
-                    <Label text="Plan and manage your own events with ease." />
+            <HBox id="featureCards" alignment="CENTER" spacing="20">
+                <VBox styleClass="feature-card">
+                    <ImageView styleClass="feature-icon" />
+                    <Label styleClass="feature-title" text="Create Events" />
+                    <Label styleClass="feature-description" text="Plan and manage your own events with ease." />
                 </VBox>
 
-                <VBox alignment="CENTER" spacing="10">
-                    <ImageView fitHeight="100" fitWidth="100" preserveRatio="true" />
-                    <Label style="-fx-font-weight: bold;" text="Find Events" />
-                    <Label text="Discover exciting events happening near you." />
+                <VBox styleClass="feature-card">
+                    <ImageView styleClass="feature-icon" />
+                    <Label styleClass="feature-title" text="Find Events" />
+                    <Label styleClass="feature-description" text="Discover exciting events happening near you." />
                 </VBox>
 
-                <VBox alignment="CENTER" spacing="10">
-                    <ImageView fitHeight="100" fitWidth="100" preserveRatio="true" />
-                    <Label style="-fx-font-weight: bold;" text="Work at Events" />
-                    <Label text="Find job opportunities at various events." />
+                <VBox styleClass="feature-card">
+                    <ImageView styleClass="feature-icon" />
+                    <Label styleClass="feature-title" text="Work at Events" />
+                    <Label styleClass="feature-description" text="Find job opportunities at various events." />
                 </VBox>
             </HBox>
 
-            <HBox alignment="CENTER" spacing="10">
-                <Button onAction="#onEventsClick" style="-fx-background-color: #008080; -fx-text-fill: white; -fx-padding: 10;" text="Explore Events" />
-                <Button onAction="#onOrganizerButtonClick" style="-fx-background-color: #008080; -fx-text-fill: white; -fx-padding: 10;" text="Create an Event" />
+            <HBox id="actionButtons" alignment="CENTER" spacing="10">
+                <Button prefHeight="42.0" prefWidth="160.0" styleClass="action-button" text="Explore Events" />
+                <Button prefHeight="42.0" prefWidth="160.0" styleClass="action-button" text="Create an Event" />
             </HBox>
         </VBox>
     </center>

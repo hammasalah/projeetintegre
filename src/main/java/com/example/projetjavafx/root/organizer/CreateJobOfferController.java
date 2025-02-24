@@ -1,5 +1,6 @@
 package com.example.projetjavafx.root.organizer;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,6 +55,7 @@ public class CreateJobOfferController {
 
     @FXML
     public void initialize() {
+
         // Initialize ComboBoxes
         employmentTypeComboBox.getItems().addAll("Full-Time", "Part-Time", "Contract", "Internship");
         currencyComboBox.getItems().addAll("USD", "EUR", "TND");
@@ -64,8 +66,9 @@ public class CreateJobOfferController {
 
         // Add event handlers
         postJobButton.setOnAction(event -> handlePostJob());
+        
     }
-
+   
     @FXML
     private void handlePostJob() {
         if (!validateForm()) {
@@ -117,7 +120,7 @@ public class CreateJobOfferController {
     }
 
     @FXML
-    private void handleHomeButton(javafx.event.ActionEvent event) {
+    private void handleHomeButton(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/root/root-view.fxml"));
             Parent root = loader.load();
@@ -130,9 +133,21 @@ public class CreateJobOfferController {
     }
 
     @FXML
-    private void handleAnalyticsButton(javafx.event.ActionEvent event) {
+    private void handleAnalyticsButton(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/organizer/analytics-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onJobFeedButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/jobfeed/job-feed-view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

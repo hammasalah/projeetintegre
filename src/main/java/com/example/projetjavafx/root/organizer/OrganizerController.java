@@ -1,5 +1,6 @@
 package com.example.projetjavafx.root.organizer;
 
+import com.example.projetjavafx.root.jobApplications.JobApplicationsController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,6 +43,7 @@ public class OrganizerController {
     @FXML private TableColumn<Map<String, String>, String> recruiterNameColumn;
     @FXML private TableColumn<Map<String, String>, String> recruiterEmailColumn;
     @FXML private TableColumn<Map<String, String>, String> createdAtColumn;
+    private String fatalError;
 
     @FXML
     public void initialize() {
@@ -153,4 +155,53 @@ public class OrganizerController {
 
         }
     }
+
+    public void onJobFeedButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/jobfeed/job-feed-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    @FXML
+    private void onReviewApplicationsButtonClick(ActionEvent event) {
+        try {
+            // Correcting the FXML file path
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "/com/example/projetjavafx/JobApplications/application_review-view.fxml"
+            ));
+
+            Parent root = loader.load();
+
+            // Ensure the controller is correctly initialized
+            JobApplicationsController controller = loader.getController();
+            int yourActualJobId = 1; // Replace with actual job ID
+            controller.setJobId(yourActualJobId);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Job Applications");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load Job Applications View.");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
+

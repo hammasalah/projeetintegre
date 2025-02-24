@@ -58,5 +58,21 @@ public class JobFeedRepository {
         }
         return jobs;
     }
+    public static void applyForJob(int userId, int jobId, String coverLetter, String resumePath) throws SQLException {
+        String sql = "INSERT INTO Applications (user_id, job_id, status, applied_at, rewarded, cover_letter, resume_path) " +
+                "VALUES (?, ?, 'pending', ?, 0, ?, ?)";
+
+        try (Connection conn = AivenMySQLManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, jobId);
+            pstmt.setString(3, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            pstmt.setString(4, coverLetter);
+            pstmt.setString(5, resumePath);
+
+            pstmt.executeUpdate();
+        }
+    }
 
 }
