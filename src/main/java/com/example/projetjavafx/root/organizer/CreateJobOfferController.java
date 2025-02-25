@@ -119,41 +119,46 @@ public class CreateJobOfferController {
         alert.showAndWait();
     }
 
-    @FXML
-    private void handleHomeButton(ActionEvent event) {
+    private void loadView(String fxmlPath, ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/root/root-view.fxml"));
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 
     @FXML
-    private void handleAnalyticsButton(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/organizer/analytics-view.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected void onDashboardClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/organizer/organizer-view.fxml", event);
     }
+
+    @FXML
+    protected void onEventsClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/events/events-view.fxml", event);
+    }
+
+    @FXML
+    protected void onAnalyticsClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/organizer/analytics-view.fxml", event);
+    }
+
+
 
     public void onJobFeedButtonClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/jobfeed/job-feed-view.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadView("/com/example/projetjavafx/jobfeed/job-feed-view.fxml", event);
+    }
+
+
+
+    public void onHomeButtonClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/root/root-view.fxml", event);
     }
 }

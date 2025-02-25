@@ -106,6 +106,18 @@ public class JobFeedController {
     }
 
 
+    // Helper method for navigation
+    private void navigateTo(String fxmlPath, ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // Navigation Methods
     @FXML
     private void onHomeClick(ActionEvent event) {
@@ -139,25 +151,8 @@ public class JobFeedController {
     }
 
     @FXML
-    private void onSettingsClick(ActionEvent event) {
-        navigateTo("/com/example/projetjavafx/settings/settings-view.fxml", event);
-    }
-
-    @FXML
     private void onAnalyticsClick(ActionEvent event) {
         navigateTo("/com/example/projetjavafx/organizer/analytics-view.fxml", event);
-    }
-
-    // Helper method for navigation
-    private void navigateTo(String fxmlPath, ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void onCreateJobButtonClick(ActionEvent event) {
@@ -165,5 +160,8 @@ public class JobFeedController {
 
     }
 
+    public void onJobApplicationsButtonClick(ActionEvent event) {
+        navigateTo("/com/example/projetjavafx/JobApplications/application_review-view.fxml", event);
+    }
 
 }

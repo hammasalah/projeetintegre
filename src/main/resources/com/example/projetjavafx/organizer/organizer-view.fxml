@@ -24,6 +24,7 @@
                 <Button fx:id="createJobButton" onAction="#onCreateJobClick" prefHeight="38.0" prefWidth="223.0" text="Create Job Post" />
                <Button fx:id="jobFeedButton" onAction="#onJobFeedButtonClick" prefHeight="38.0" prefWidth="241.0" text="Job Feed" />
             <Button fx:id="reviewApplicationsButton" mnemonicParsing="false" onAction="#onReviewApplicationsButtonClick" prefHeight="38.0" prefWidth="211.0" text="Review Applications" />
+            <Button fx:id="appliedAtButton" mnemonicParsing="false" onAction="#onAppliedAtButtonClick" prefHeight="38.0" prefWidth="264.0" text="Applied  At " />
             </VBox>
         </VBox>
     </left>

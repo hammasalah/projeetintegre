@@ -92,4 +92,6 @@ public class RootController {
     protected void onJobFeedClick(ActionEvent event) {
         loadView("/com/example/projetjavafx/jobfeed/job-feed-view.fxml", event);
     }
+
+
 }

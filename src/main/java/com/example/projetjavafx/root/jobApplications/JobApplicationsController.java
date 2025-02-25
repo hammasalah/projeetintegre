@@ -2,9 +2,15 @@ package com.example.projetjavafx.root.jobApplications;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.stage.Stage;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +20,7 @@ import java.util.Optional;
 
 public class JobApplicationsController {
 
+    public Button dashboardButton;
     @FXML private TableView<Application> applicationsTable;
     @FXML private TableColumn<Application, Number> applicationIdColumn;
     @FXML private TableColumn<Application, Number> userIdColumn;
@@ -66,10 +73,11 @@ public class JobApplicationsController {
         });
 
         // Editable status column with ComboBox
-        statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn("pending", "accepted", "rejected"));
+        statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(FXCollections.observableArrayList("pending", "accepted", "rejected")));
         statusColumn.setOnEditCommit(event -> {
             Application application = event.getRowValue();
             application.setStatus(event.getNewValue());
+//            handleStatusUpdate(application); // Automatically update the status in the database
         });
 
         // Action column with an Update button
@@ -124,15 +132,34 @@ public class JobApplicationsController {
     }
 
     private void handleViewResume(Application application) {
+        // Check if the resumePath is null or empty
+        if (application.getResumePath() == null || application.getResumePath().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Resume Not Found", "The resume file path is not specified.");
+            return;
+        }
+
+        // Create a File object from the resumePath
+        File resumeFile = new File(application.getResumePath());
+
+        // Check if the file exists
+        if (!resumeFile.exists()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Resume Not Found", "The resume file could not be located at: " + application.getResumePath());
+            return;
+        }
+
+        // Check if the file is a PDF
+        if (!resumeFile.getName().toLowerCase().endsWith(".pdf")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Invalid File Type", "The resume file must be a PDF.");
+            return;
+        }
+
+        // Try to open the file using the default PDF viewer
         try {
-            File resumeFile = new File(application.getResumePath());
-            if (resumeFile.exists()) {
-                Desktop.getDesktop().open(resumeFile);
-            } else {
-                showAlert(Alert.AlertType.ERROR, "File Not Found", "Resume Not Found", "The resume file could not be located");
-            }
+            // Wrap the file path in double quotes to handle spaces and special characters
+            String quotedFilePath = STR."\"\{resumeFile.getAbsolutePath()}\"";
+            Runtime.getRuntime().exec(new String[]{"cmd", "/c", "start", "", quotedFilePath});
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Error Opening File", "Could not open resume", e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Error", "Could Not Open Resume", "An error occurred while trying to open the resume: " + e.getMessage());
         }
     }
 
@@ -153,8 +180,53 @@ public class JobApplicationsController {
     }
 
     public void setJobId(int yourActualJobId) {
+        // Implement this method if needed
     }
 
-    // If needed, implement or remove setJobId depending on your design.
+    private void loadView(String fxmlPath, ActionEvent event) {
+        try {
 
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    @FXML
+    protected void onDashboardClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/organizer/organizer-view.fxml", event);
+    }
+
+    @FXML
+    protected void onEventsClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/events/events-view.fxml", event);
+    }
+
+    @FXML
+    protected void onAnalyticsClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/organizer/analytics-view.fxml", event);
+    }
+
+    public void onJobApplicationsButtonClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/JobApplications/application_review-view.fxml", event);
+    }
+
+    public void onJobFeedButtonClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/jobfeed/job-feed-view.fxml", event);
+    }
+
+    public void onCreateJobButtonClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/organizer/create-job-offer-view.fxml", event);
+    }
+
+    public void onHomeButtonClick(ActionEvent event) {
+        loadView("/com/example/projetjavafx/root/root-view.fxml", event);
+    }
 }

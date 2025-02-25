@@ -24,12 +24,13 @@
 
     <left>
         <VBox id="sidebar" alignment="TOP_LEFT" spacing="15">
+            <Button fx:id="organizerButton" onAction="#onOrganizerButtonClick" styleClass="nav-button" text="Dashboard" />
             <Button fx:id="eventsButton" onAction="#onEventsClick" styleClass="nav-button" text="Events" />
-            <Button fx:id="organizerButton" onAction="#onOrganizerButtonClick" styleClass="nav-button" text="Organizer" />
-            <Button fx:id="profileButton" onAction="#onProfileClick" styleClass="nav-button" text="Profile" />
-            <Button fx:id="groupButton" onAction="#onGroupButtonClick"  styleClass="nav-button" text="Group" />
+            <Button fx:id="groupButton" onAction="#onGroupButtonClick" styleClass="nav-button" text="Group" />
+            <Button fx:id="jobButton" onAction="#onJobFeedClick" prefHeight="40.0" prefWidth="250.0" styleClass="nav-button" text="Job Feed" />
             <Button fx:id="createJobButton" onAction="#onCreateJobClick" styleClass="nav-button" text="Create Job" />
-            <Button fx:id="jobButton" onAction="#onJobFeedClick" styleClass="nav-button" text="Jobs" />
+            <Button fx:id="profileButton" onAction="#onProfileClick" styleClass="nav-button" text="Profile" />
+
         </VBox>
     </left>
 

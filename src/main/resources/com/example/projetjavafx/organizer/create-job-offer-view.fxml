@@ -18,15 +18,16 @@
     <left>
         <VBox id="sidebar" alignment="TOP_LEFT" prefHeight="1050.0" spacing="15">
             <!-- Application Title -->
-            <Label id="sidebarTitle" text="Event Manager Pro" />
+            <Label id="sidebarTitle" text="Create New Job" />
 
             <!-- Navigation Buttons -->
             <VBox id="navButtons" spacing="10">
-                <Button onAction="#handleHomeButton" styleClass="nav-button" text="Home" />
-                <Button onAction="#handleAnalyticsButton" styleClass="nav-button" text="Analytics" />
-                <Button styleClass="nav-button" text="Create Event" />
-                <Button prefHeight="25.0" prefWidth="215.0" styleClass="nav-button" text="Create Job Post" />
+                <Button onAction="#onHomeButtonClick" styleClass="nav-button" text="Home" />
+            <Button fx:id="dashboardButton" mnemonicParsing="false" onAction="#onDashboardClick" prefHeight="23.0" prefWidth="232.0" styleClass="nav-button" text="Dashboard" />
                 <Button fx:id="jobFeedButton" onAction="#onJobFeedButtonClick" styleClass="nav-button" text="Job Feed" />
+                <Button styleClass="nav-button" text="Create Event" />
+                <Button fx:id="eventsButton" onAction="#onEventsClick" prefHeight="25.0" prefWidth="215.0" styleClass="nav-button" text="Events" />
+                <Button fx:id="analyticsButton" onAction="#onAnalyticsClick" styleClass="nav-button" text="Analytics" />
             </VBox>
         </VBox>
     </left>

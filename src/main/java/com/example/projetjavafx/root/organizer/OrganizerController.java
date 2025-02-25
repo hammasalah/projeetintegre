@@ -203,5 +203,20 @@ public class OrganizerController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void onAppliedAtButtonClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projetjavafx/jobApplications/applied-jobs.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+    }
 }
 

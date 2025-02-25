@@ -25,12 +25,12 @@
     <!-- SIDE BAR -->
     <left>
         <VBox id="sidebar" prefHeight="979.0" prefWidth="250.0" spacing="10">
+            <Button fx:id="homeButton" prefHeight="40.0" prefWidth="231.0" styleClass="nav-button" text="Home" />
             <Button fx:id="dashboardButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Dashboard" textAlignment="CENTER" />
             <Button fx:id="eventsButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Events" textAlignment="CENTER" />
-            <Button fx:id="jobFeedButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Job Feed" />
-            <Button fx:id="groupsButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Groups" />
+            <Button fx:id="jobApplicationsButton" onAction="#onJobApplicationsButtonClick" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Job Applications" />
+            <Button fx:id="analyticsButton" onAction="#onAnalyticsClick" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Analytics" />
             <Button fx:id="createJobButton" prefHeight="40.0" prefWidth="209.0" styleClass="nav-button" text="Create Job" />
-            <Button fx:id="homeButton" prefHeight="40.0" prefWidth="231.0" styleClass="nav-button" text="Home" />
         </VBox>
     </left>
 
@@ -38,10 +38,9 @@
     <center>
         <ScrollPane fx:id="scrollPane">
             <content>
-                <FlowPane fx:id="jobsContainer" alignment="CENTER"
-                          hgap="20" vgap="20" prefWrapLength="1793">
+                <FlowPane fx:id="jobsContainer" alignment="CENTER" hgap="20" prefWrapLength="1793" vgap="20">
                     <padding>
-                        <Insets bottom="20" left="20" right="20" top="20"/>
+                        <Insets bottom="20" left="20" right="20" top="20" />
                     </padding>
                 </FlowPane>
             </content>
