@@ -9,38 +9,64 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnalyticsRepository {
 
-    public static ObservableList<PieChart.Data> getSourceData() throws SQLException {
-        ObservableList<PieChart.Data> data = javafx.collections.FXCollections.observableArrayList();
-        String sql = "SELECT source, COUNT(*) as clicks FROM ads GROUP BY source";
+    public static List<EventStats> getEventStats(int organizerId) throws SQLException {
+        List<EventStats> stats = new ArrayList<>();
+        String sql = "SELECT e.event_id, e.name, "
+                + "COUNT(p.id) AS total, "
+                + "SUM(CASE WHEN u.gender = 'Male' THEN 1 ELSE 0 END) AS male, "
+                + "SUM(CASE WHEN u.gender = 'Female' THEN 1 ELSE 0 END) AS female "
+                + "FROM Events e "
+                + "LEFT JOIN participation p ON e.event_id = p.event_id "
+                + "LEFT JOIN Users u ON p.participant_id = u.user_id "
+                + "WHERE e.organizer_id = ? "
+                + "GROUP BY e.event_id";
 
         try (Connection conn = AivenMySQLManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            pstmt.setInt(1, organizerId);
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
-                data.add(new PieChart.Data(rs.getString("source"), rs.getInt("clicks")));
+                stats.add(new EventStats(
+                        rs.getInt("event_id"),
+                        rs.getString("name"),
+                        rs.getInt("total"),
+                        rs.getInt("male"),
+                        rs.getInt("female")
+                ));
             }
         }
-        return data;
+        return stats;
     }
 
-    public static XYChart.Series<String, Number> getSpendData() throws SQLException {
+    public static XYChart.Series<String, Number> getParticipationTrend(int organizerId) throws SQLException {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        String sql = "SELECT date, SUM(amount_spent) as total_spent FROM ads GROUP BY date";
+        String sql = "SELECT e.name, COUNT(p.id) AS participants "
+                + "FROM Events e "
+                + "LEFT JOIN participation p ON e.event_id = p.event_id "
+                + "WHERE e.organizer_id = ? "
+                + "GROUP BY e.event_id "
+                + "ORDER BY e.start_time";
 
         try (Connection conn = AivenMySQLManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            pstmt.setInt(1, organizerId);
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
-                series.getData().add(new XYChart.Data<>(rs.getString("date"), rs.getDouble("total_spent")));
+                series.getData().add(new XYChart.Data<>(
+                        rs.getString("name"),
+                        rs.getInt("participants")
+                ));
             }
         }
         return series;
     }
-
-    // Add more methods for other charts and data as needed
 }

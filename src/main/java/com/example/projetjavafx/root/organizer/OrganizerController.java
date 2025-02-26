@@ -173,7 +173,6 @@ public class OrganizerController {
     @FXML
     private void onReviewApplicationsButtonClick(ActionEvent event) {
         try {
-            // Correcting the FXML file path
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
                     "/com/example/projetjavafx/JobApplications/application_review-view.fxml"
             ));
@@ -185,16 +184,16 @@ public class OrganizerController {
             int yourActualJobId = 1; // Replace with actual job ID
             controller.setJobId(yourActualJobId);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Job Applications");
-            stage.show();
+            // Get the current scene and update the root
+            Scene scene = ((Button) event.getSource()).getScene();
+            scene.setRoot(root); // Set the new content without opening a new window
 
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "Failed to load Job Applications View.");
         }
     }
+
 
     private void showAlert(String title, String message) {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);

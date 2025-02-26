@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.stage.Stage;
 
-import java.awt.Desktop;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,6 +21,12 @@ import java.util.Optional;
 public class JobApplicationsController {
 
     public Button dashboardButton;
+    public Button homeButton;
+    public Button JobFeedButton;
+    public Button jobFeedButton;
+    public Button createJobButton;
+    public Button eventsButton;
+    public Button analyticsButton;
     @FXML private TableView<Application> applicationsTable;
     @FXML private TableColumn<Application, Number> applicationIdColumn;
     @FXML private TableColumn<Application, Number> userIdColumn;
@@ -185,17 +191,14 @@ public class JobApplicationsController {
 
     private void loadView(String fxmlPath, ActionEvent event) {
         try {
-
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
+
+            // Get the current stage (instead of opening a new one)
             Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            stage.getScene().setRoot(root); // Set the new root to the same scene
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 

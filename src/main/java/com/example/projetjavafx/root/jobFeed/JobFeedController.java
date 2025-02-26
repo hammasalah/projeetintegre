@@ -18,8 +18,10 @@ import java.util.List;
 
 public class JobFeedController {
     public Button createJobButton;
+    public Button jobApplicationsButton;
+    public Button analyticsButton;
     @FXML private FlowPane jobsContainer;
-    @FXML private Button homeButton, profileButton, logoutButton, dashboardButton, eventsButton, jobFeedButton, groupsButton;
+    @FXML private Button homeButton, profileButton, logoutButton, dashboardButton, eventsButton;
 
     private int currentUserId = 1; // Replace with the actual logged-in user's ID
 
@@ -37,7 +39,6 @@ public class JobFeedController {
         logoutButton.setOnAction(this::onLogoutClick);
         dashboardButton.setOnAction(this::onDashboardClick);
         eventsButton.setOnAction(this::onEventsClick);
-        groupsButton.setOnAction(this::onGroupsClick);
         createJobButton.setOnAction(this::onCreateJobButtonClick);
     }
 
@@ -159,7 +160,6 @@ public class JobFeedController {
         navigateTo("/com/example/projetjavafx/organizer/create-job-offer-view.fxml", event);
 
     }
-
     public void onJobApplicationsButtonClick(ActionEvent event) {
         navigateTo("/com/example/projetjavafx/JobApplications/application_review-view.fxml", event);
     }
